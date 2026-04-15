@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Showplly × Photoroom</title>
+  <title>Photoroom × Showplly | v0.3</title>
   <style>
     :root {
-      --bg: #f7f8fa;
-      --surface: #ffffff;
-      --surface-2: #f1f4f8;
-      --text: #0f172a;
-      --muted: #475569;
-      --line: #dbe2ea;
-      --blue: #1d4ed8;
-      --blue-dark: #1e3a8a;
-      --shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
-      --radius: 20px;
-      --max: 1180px;
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #5b6472;
+      --line: #d9e1ea;
+      --blue: #2f6fed;
+      --blue-soft: #eaf1ff;
+      --blue-deep: #1f57c8;
+      --shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
+      --max: 1120px;
+      --radius: 22px;
     }
 
     * { box-sizing: border-box; }
@@ -24,14 +24,14 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(180deg, #f8fbff 0%, #f5f7fb 100%);
       color: var(--text);
-      background: var(--bg);
-      line-height: 1.6;
+      line-height: 1.55;
     }
 
     a { color: inherit; text-decoration: none; }
 
-    .container {
+    .wrap {
       width: min(var(--max), calc(100% - 40px));
       margin: 0 auto;
     }
@@ -39,10 +39,10 @@
     .nav {
       position: sticky;
       top: 0;
-      z-index: 50;
-      backdrop-filter: blur(10px);
-      background: rgba(247, 248, 250, 0.88);
-      border-bottom: 1px solid rgba(219, 226, 234, 0.9);
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(247, 249, 252, 0.82);
+      border-bottom: 1px solid rgba(217, 225, 234, 0.7);
     }
 
     .nav-inner {
@@ -50,221 +50,326 @@
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      min-height: 74px;
+      padding: 14px 0;
     }
 
     .brand {
-      font-size: 1.05rem;
       font-weight: 700;
-      letter-spacing: 0.01em;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
     }
-
-    .brand span { color: var(--blue); }
 
     .nav-links {
       display: flex;
-      align-items: center;
-      gap: 22px;
-      color: var(--muted);
-      font-size: 0.96rem;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
     }
 
-    .btn {
+    .nav-links a,
+    .btn,
+    .btn-secondary {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.84);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      transition: 0.2s ease;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      min-height: 48px;
-      padding: 0 18px;
-      border-radius: 999px;
-      font-weight: 600;
-      transition: 0.2s ease;
-      border: 1px solid transparent;
-      cursor: pointer;
+      gap: 8px;
     }
 
-    .btn-primary {
-      background: var(--text);
-      color: #fff !important;
-    }
-
-    .btn-primary:hover {
-      opacity: 0.92;
+    .nav-links a:hover,
+    .btn:hover,
+    .btn-secondary:hover {
       transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn {
+      background: var(--blue);
+      color: white;
+      border-color: var(--blue);
     }
 
     .btn-secondary {
-      background: #fff;
-      border-color: var(--line);
-      color: var(--text) !important;
-    }
-
-    .btn-secondary:hover {
-      border-color: #c3cfdb;
-      transform: translateY(-1px);
+      background: white;
+      color: var(--text);
     }
 
     .hero {
-      padding: 72px 0 42px;
+      padding: 76px 0 28px;
     }
 
-    .eyebrow {
-      display: inline-block;
-      margin-bottom: 18px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: #eaf1ff;
-      color: var(--blue-dark);
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .hero-grid {
+    .hero-card {
+      background: radial-gradient(circle at top right, #eef4ff 0%, #ffffff 42%), var(--card);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: 52px;
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.2fr 1fr;
       gap: 34px;
       align-items: center;
     }
 
-    h1 {
-      margin: 0 0 18px;
-      font-size: clamp(2.35rem, 5vw, 4.7rem);
-      line-height: 1.03;
-      letter-spacing: -0.03em;
+    .eyebrow {
+      display: inline-block;
+      color: var(--blue);
+      background: var(--blue-soft);
+      border: 1px solid #d6e4ff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 8px 12px;
+      border-radius: 999px;
+      margin-bottom: 18px;
     }
 
-    .lead {
-      max-width: 780px;
-      margin: 0;
-      font-size: 1.15rem;
+    h1, h2, h3 { margin: 0; line-height: 1.12; }
+    h1 { font-size: clamp(40px, 6vw, 66px); letter-spacing: -0.04em; }
+    h2 { font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.03em; }
+    h3 { font-size: 22px; letter-spacing: -0.02em; }
+
+    .subhead {
+      margin-top: 18px;
+      font-size: 20px;
       color: var(--muted);
+      max-width: 820px;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
+      gap: 12px;
       margin-top: 28px;
     }
 
     .hero-note {
-      margin-top: 18px;
+      margin-top: 14px;
       color: var(--muted);
-      font-size: 0.96rem;
+      font-size: 14px;
     }
 
-    .hero-card {
+    .hero-panel {
       background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
       border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 26px;
-      box-shadow: var(--shadow);
-    }
-
-    .mini-label {
-      font-size: 0.85rem;
-      color: var(--muted);
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-    }
-
-    .signal-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .signal {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 16px;
-    }
-
-    .signal h4 {
-      margin: 0 0 8px;
-      font-size: 0.96rem;
-    }
-
-    .signal p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .statement {
-      margin-top: 24px;
-      background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
-      border: 1px solid #d7e5ff;
       border-radius: 24px;
       padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      right: -40px;
+      top: -40px;
+      width: 140px;
+      height: 140px;
+      border-radius: 999px;
+      background: rgba(47,111,237,0.06);
+      pointer-events: none;
+    }
+
+    .panel-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .panel-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .concept-flow {
+      display: grid;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .concept-node {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: white;
+      padding: 14px 16px;
+      box-shadow: 0 4px 14px rgba(17, 24, 39, 0.04);
+    }
+
+    .concept-node strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .concept-node span {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .concept-arrow {
+      text-align: center;
+      color: var(--blue);
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .hero-band {
+      margin-top: 18px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%);
+      color: white;
+      border-radius: 24px;
+      padding: 22px 24px;
       box-shadow: var(--shadow);
     }
 
-    .statement p {
-      margin: 0;
-      font-size: clamp(1.15rem, 2vw, 1.5rem);
-      line-height: 1.4;
-      letter-spacing: -0.01em;
+    .hero-band strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
     }
 
-    .statement strong {
-      color: var(--blue-dark);
+    .hero-band span {
+      display: block;
+      font-size: 15px;
+      opacity: 0.95;
     }
 
     .section {
-      padding: 34px 0 26px;
+      padding: 34px 0;
     }
 
-    .section-head {
-      margin-bottom: 24px;
-      max-width: 780px;
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 20px;
     }
 
-    .section-head h2 {
-      margin: 0 0 10px;
-      font-size: clamp(1.8rem, 3vw, 2.9rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+    .section-kicker {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
     }
 
-    .section-head p {
-      margin: 0;
+    .section-intro {
       color: var(--muted);
-      font-size: 1.05rem;
+      max-width: 760px;
+      margin-top: 12px;
+      font-size: 17px;
     }
 
-    .grid-2, .grid-4 {
+    .cards-3, .cards-2, .cards-4 {
       display: grid;
       gap: 18px;
     }
 
-    .grid-2 { grid-template-columns: repeat(2, 1fr); }
-    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .cards-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .cards-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cards-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
     .card {
-      background: var(--surface);
+      background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 24px;
       box-shadow: var(--shadow);
+      padding: 24px;
     }
 
-    .card h3, .card h4 {
-      margin: 0 0 10px;
-      line-height: 1.2;
+    .tag {
+      display: inline-block;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
     }
 
-    .card p {
-      color: var(--muted);
-      font-size: 0.98rem;
+    .keyline {
+      color: var(--blue);
+      font-size: 18px;
+      font-weight: 700;
+      margin: 14px 0 10px;
+      line-height: 1.35;
+    }
+
+    p { margin: 0 0 14px; }
+
+    ul.clean {
+      list-style: none;
+      padding: 0;
       margin: 0;
+      display: grid;
+      gap: 10px;
     }
 
-    .ux-card {
+    ul.clean li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--text);
+    }
+
+    ul.clean li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .flow .node {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px 14px;
+      min-height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .flow .arrow {
+      text-align: center;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 24px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .ux-scene {
       position: relative;
       overflow: hidden;
       background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
@@ -277,18 +382,12 @@
       width: 38px;
       height: 38px;
       border-radius: 999px;
-      background: #eaf1ff;
+      background: var(--blue-soft);
       color: var(--blue);
       font-weight: 700;
       font-size: 14px;
       margin-bottom: 14px;
       border: 1px solid #d6e4ff;
-    }
-
-    .ux-line {
-      margin-top: 12px;
-      font-size: 14px;
-      color: var(--muted);
     }
 
     .scene-strip {
@@ -327,285 +426,600 @@
       text-align: center;
     }
 
-    .cta {
-      padding: 40px 0 78px;
-    }
-
-    .cta-box {
-      background: linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
-      border: 1px solid #d6e3ff;
-      border-radius: 30px;
-      padding: 34px;
-      box-shadow: var(--shadow);
-      text-align: center;
-    }
-
-    .cta-box h2 {
-      margin: 0 0 10px;
-      font-size: clamp(1.9rem, 3vw, 2.8rem);
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-    }
-
-    .cta-box p {
-      margin: 0 auto;
-      max-width: 760px;
+    .ux-line {
+      margin-top: 12px;
+      font-size: 14px;
       color: var(--muted);
-      font-size: 1.03rem;
     }
 
-    .cta-actions {
+    .cta-band {
+      margin-top: 20px;
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 24px;
+      gap: 12px;
     }
 
     .footer {
-      border-top: 1px solid var(--line);
-      padding: 24px 0 42px;
-      color: var(--muted);
-      font-size: 0.92rem;
+      padding: 40px 0 60px;
     }
 
-    .footer-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
+    .footer-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 36px;
     }
+
+    .muted { color: var(--muted); }
 
     @media (max-width: 980px) {
-      .hero-grid,
-      .grid-2,
-      .grid-4,
+      .hero-card,
+      .cards-3,
+      .cards-2,
+      .cards-4,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .flow .arrow { transform: rotate(90deg); }
+
       .scene-flow {
         grid-template-columns: 1fr;
       }
 
-      .nav-links {
-        display: none;
-      }
-
-      .hero-actions,
-      .cta-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .container {
-        width: min(var(--max), calc(100% - 24px));
-      }
-
-      .btn { width: 100%; }
-
       .scene-arrow {
         transform: rotate(90deg);
+      }
+
+      .section-header,
+      .nav-inner {
+        display: block;
+      }
+
+      .nav-links { margin-top: 12px; justify-content: flex-start; }
+
+      .hero-card { padding: 28px; }
+
+      .hero-band strong {
+        font-size: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <header class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="index.html">Show<span>plly</span> × Photoroom</a>
-      <nav class="nav-links">
-        <a href="#why">Why Photoroom</a>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">Photoroom × Showplly</div>
+      <div class="nav-links">
+        <a href="#strategic">Strategic Layer</a>
+        <a href="#implementation">Implementation &amp; PoC</a>
         <a href="#ux">UX Scenarios</a>
+        <a href="#standards">Market &amp; Standards</a>
+        <a href="#growth">Growth Engine</a>
         <a href="#contact">Contact</a>
-      </nav>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-card">
+        <div>
+          <div class="eyebrow">Built for Photoroom</div>
+          <h1>The First Authenticity Layer of the Internet</h1>
+          <div class="subhead">
+            A Verifiable Structure of Product Identity.<br />
+            Before Commerce. Before Trust.
+          </div>
+          <div class="hero-actions">
+            <a class="btn" href="#strategic">Explore the Strategic Layer</a>
+            <a class="btn-secondary" href="#implementation">Explore Implementation &amp; PoC</a>
+            <a class="btn-secondary" href="#ux">Explore UX Scenarios</a>
+          </div>
+          <div class="hero-note">Products have content. But no identity. Photoroom already sits at the only scalable point where product identity can begin: the moment of creation.</div>
+        </div>
+
+        <aside class="hero-panel">
+          <div class="panel-title">Concept Snapshot</div>
+          <div class="panel-sub">A visual view of how identity begins and remains verifiable.</div>
+
+          <div class="concept-flow">
+            <div class="concept-node">
+              <strong>1. Product Exists</strong>
+              <span>A product enters the content creation flow.</span>
+            </div>
+            <div class="concept-arrow">↓</div>
+            <div class="concept-node">
+              <strong>2. Image Created in Photoroom</strong>
+              <span>The moment product content begins at scale.</span>
+            </div>
+            <div class="concept-arrow">↓</div>
+            <div class="concept-node">
+              <strong>3. Identity Attached at Creation</strong>
+              <span>Origin-linked structure begins with the visual asset.</span>
+            </div>
+            <div class="concept-arrow">↓</div>
+            <div class="concept-node">
+              <strong>4. Content Travels</strong>
+              <span>Ads, listings, and social distribution expand outward.</span>
+            </div>
+            <div class="concept-arrow">↓</div>
+            <div class="concept-node">
+              <strong>5. Verification Remains Possible</strong>
+              <span>Origin and continuity remain independently visible.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="hero-band">
+        <strong>Identity can begin at the moment of creation.</strong>
+        <span>Photoroom is the only scalable place to make that visible from the start.</span>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
+  <section class="section" id="strategic">
+    <div class="wrap">
+      <div class="section-header">
         <div>
-          <div class="eyebrow">Built for Photoroom</div>
-          <h1>Identity Begins at Creation</h1>
-          <p class="lead">
-            Photoroom is uniquely positioned at the point where product content begins.
-            Showplly enables identity to begin there — and remain verifiable across platforms.
-          </p>
-          <div class="hero-actions">
-            <a href="#why" class="btn btn-primary">Why this matters</a>
-            <a href="#ux" class="btn btn-secondary">Explore UX scenarios</a>
-          </div>
-          <div class="hero-note">
-            Products have content. But no identity.  
-            Photoroom already sits at the only scalable point where product identity can begin: the moment of creation.
-          </div>
-        </div>
-
-        <div class="hero-card">
-          <div class="mini-label">Why this matters now</div>
-          <div class="signal-grid">
-            <div class="signal">
-              <h4>Products have content</h4>
-              <p>But product identity does not naturally travel with images, ads, and listings.</p>
-            </div>
-            <div class="signal">
-              <h4>Content is scaling</h4>
-              <p>Yet authenticity and origin become harder to verify across platforms.</p>
-            </div>
-            <div class="signal">
-              <h4>Creation is the leverage point</h4>
-              <p>The image-creation moment is the identity-creation moment.</p>
-            </div>
-            <div class="signal">
-              <h4>This is strategic</h4>
-              <p>Not a feature layer — a new infrastructure position at creation.</p>
-            </div>
-          </div>
+          <div class="section-kicker">Strategic Layer</div>
+          <h2>Why This Matters for Photoroom</h2>
+          <div class="section-intro">For leadership and business stakeholders: the problem, the timing, the position, and the strategic upside.</div>
         </div>
       </div>
 
-      <div class="container">
-        <div class="statement">
-          <p>
-            <strong>Photoroom is not just where product visuals are created.</strong>
-            It can become where product identity begins.
-          </p>
-        </div>
+      <div class="cards-3">
+        <article class="card">
+          <div class="tag">Problem</div>
+          <h3>Products have content. But no identity.</h3>
+          <div class="keyline">Images are no longer proof. Content is no longer trust.</div>
+          <p>Every product on the internet is represented by images, ads, and video. But none of them carry a verifiable structure of origin.</p>
+        </article>
+
+        <article class="card">
+          <div class="tag">Why now</div>
+          <h3>The collapse has already started.</h3>
+          <div class="keyline">This is no longer a future issue. It is a market condition.</div>
+          <ul class="clean">
+            <li>Fake listings are increasing</li>
+            <li>AI-generated fraud is scaling</li>
+            <li>Verification has not caught up</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="tag">Why Photoroom</div>
+          <h3>The image-creation moment is the identity-creation moment.</h3>
+          <div class="keyline">This is not a feature opportunity. This is a market-defining position.</div>
+          <p>Every product entering the internet passes through image creation. Photoroom already controls this moment.</p>
+        </article>
       </div>
-    </section>
 
-    <section id="why" class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2>Why this matters for Photoroom</h2>
-          <p>
-            The opportunity is not only better content. It is defining how product identity begins
-            before that content spreads across the internet.
-          </p>
-        </div>
+      <div class="cards-2" style="margin-top:18px;">
+        <article class="card">
+          <div class="tag">Growth Engine</div>
+          <h3>This is not a technical upgrade.</h3>
+          <div class="keyline">This is a growth engine.</div>
+          <p>With Showplly, Photoroom can become:</p>
+          <ul class="clean">
+            <li>the entry point for trusted product content</li>
+            <li>a preferred platform for authenticity-driven brands</li>
+            <li>a growth platform for high-value merchants</li>
+          </ul>
+          <p><strong>Minimal friction.</strong><br /><strong>Maximum strategic advantage.</strong></p>
+        </article>
 
-        <div class="grid-2">
-          <div class="card">
-            <h3>Products have content. But no identity.</h3>
-            <p>Images, ads, and listings scale globally, but the relationship to origin is often lost.</p>
+        <article class="card">
+          <div class="tag">Market Force</div>
+          <h3>Buyers demand verifiable origin.</h3>
+          <div class="keyline">This is not optional. This is a structural market shift.</div>
+          <p>When buyers demand it, sellers follow. Platforms adapt.</p>
+          <div class="cta-band">
+            <a class="btn" href="#implementation">See how this works in practice</a>
+            <a class="btn-secondary" href="#contact">Request a private discussion</a>
           </div>
-
-          <div class="card">
-            <h3>The collapse has already started</h3>
-            <p>Content generation grows exponentially. Authenticity and origin do not keep pace.</p>
-          </div>
-
-          <div class="card">
-            <h3>This is not a feature layer</h3>
-            <p>It is a new infrastructure layer that can begin at the exact moment content is created.</p>
-          </div>
-
-          <div class="card">
-            <h3>Buyers demand verifiable origin</h3>
-            <p>Trust is shifting from mere visual polish toward origin-linked structure.</p>
-          </div>
-        </div>
+        </article>
       </div>
-    </section>
-
-    <section id="ux" class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2>Illustrative UX scenarios</h2>
-          <p>
-            These examples show how identity at creation could be experienced in merchant, buyer,
-            and cross-platform flows.
-          </p>
-        </div>
-
-        <div class="grid-4">
-          <div class="card ux-card">
-            <div class="ux-number">01</div>
-            <h3>Verified at Creation</h3>
-            <p>Identity is attached when content is created in Photoroom.</p>
-            <div class="scene-strip">
-              <div class="scene-flow">
-                <div class="scene-step">Merchant prepares product</div>
-                <div class="scene-arrow">→</div>
-                <div class="scene-step">Image created in Photoroom</div>
-                <div class="scene-arrow">→</div>
-                <div class="scene-step">Identity attached at creation</div>
-              </div>
-            </div>
-            <div class="ux-line">Signal: creation and identity no longer start separately.</div>
-          </div>
-
-          <div class="card ux-card">
-            <div class="ux-number">02</div>
-            <h3>View Authenticity</h3>
-            <p>Users encounter content elsewhere and open an authenticity view.</p>
-            <div class="scene-strip">
-              <div class="scene-flow">
-                <div class="scene-step">Buyer sees content</div>
-                <div class="scene-arrow">→</div>
-                <div class="scene-step">Authenticity page opened</div>
-                <div class="scene-arrow">→</div>
-                <div class="scene-step">Origin and continuity confirmed</div>
-              </div>
-            </div>
-            <div class="ux-line">Signal: identity remains independently visible after distribution.</div>
-          </div>
-
-          <div class="card ux-card">
-            <div class="ux-number">03</div>
-            <h3>Merchant Confidence Layer</h3>
-            <p>Sellers manage content with a clearer sense that identity exists alongside the asset.</p>
-            <div class="scene-strip">
-              <div class="scene-flow">
-                <div class="scene-step">Seller manages content</div>
-                <div class="scene-arrow">→</div>
-                <div class="scene-step">Identity visible alongside visuals</div>
-                <div class="scene-arrow">→</div>
-                <div class="scene-step">Clearer merchant confidence</div>
-              </div>
-            </div>
-            <div class="ux-line">Signal: trust is supported by structure, not by manual explanation.</div>
-          </div>
-
-          <div class="card ux-card">
-            <div class="ux-number">04</div>
-            <h3>Cross-Platform Verification</h3>
-            <p>Identity continues even after content leaves its point of creation.</p>
-            <div class="scene-strip">
-              <div class="scene-flow">
-                <div class="scene-step">Ad / Listing / Social</div>
-                <div class="scene-arrow">→</div>
-                <div class="scene-step">Identity remains linked</div>
-                <div class="scene-arrow">→</div>
-                <div class="scene-step">Verification still possible</div>
-              </div>
-            </div>
-            <div class="ux-line">Signal: origin can still be checked outside the original platform.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="cta">
-      <div class="container">
-        <div class="cta-box">
-          <h2>Define product identity together</h2>
-          <p>
-            Continue generating images — or define the identity layer that products can carry across the internet.
-          </p>
-          <div class="cta-actions">
-            <a class="btn btn-primary" href="mailto:founder@showplly.com?subject=Photoroom%20Discussion%20-%20Showplly">
-              Contact founder@showplly.com
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer-row">
-      <div>© Showplly. All rights reserved.</div>
-      <div>The First Authenticity Layer of the Internet</div>
     </div>
-  </footer>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="card">
+        <div class="tag">State Structure</div>
+        <h2 style="margin-bottom:14px;">Showplly does not decide what to trust.<br />It reveals what exists.</h2>
+        <div class="section-intro" style="margin-top:0; max-width:820px;">A product identity is not a score. It is a fixed structure: origin, issuance, and continuity.</div>
+        <div class="cards-3" style="grid-template-columns: repeat(5, minmax(0, 1fr)); margin-top:26px;">
+          <article class="card" style="padding:20px; box-shadow:none;">
+            <div class="tag" style="margin-bottom:8px;">1</div>
+            <h3 style="font-size:18px; margin-bottom:10px;">Authority Root</h3>
+            <p class="muted">Entity is anchored.</p>
+          </article>
+          <article class="card" style="padding:20px; box-shadow:none;">
+            <div class="tag" style="margin-bottom:8px;">2</div>
+            <h3 style="font-size:18px; margin-bottom:10px;">State Fixed</h3>
+            <p class="muted">Origin becomes immutable.</p>
+          </article>
+          <article class="card" style="padding:20px; box-shadow:none;">
+            <div class="tag" style="margin-bottom:8px;">3</div>
+            <h3 style="font-size:18px; margin-bottom:10px;">Series Token Issued</h3>
+            <p class="muted">Product receives its birth ID.</p>
+          </article>
+          <article class="card" style="padding:20px; box-shadow:none;">
+            <div class="tag" style="margin-bottom:8px;">4</div>
+            <h3 style="font-size:18px; margin-bottom:10px;">Creation-Time Linking</h3>
+            <p class="muted">Content attaches to identity.</p>
+          </article>
+          <article class="card" style="padding:20px; box-shadow:none;">
+            <div class="tag" style="margin-bottom:8px;">5</div>
+            <h3 style="font-size:18px; margin-bottom:10px;">Identity Travels</h3>
+            <p class="muted">Across platforms and distribution.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="implementation">
+    <div class="wrap">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Implementation &amp; PoC</div>
+          <h2>How This Becomes Real</h2>
+          <div class="section-intro">For product and engineering stakeholders: a structural view of implementation, a controlled PoC, and a path from validation to production.</div>
+        </div>
+      </div>
+
+      <div class="cards-2">
+        <article class="card">
+          <div class="tag">Positioning</div>
+          <h3>This is not a complex system build.</h3>
+          <div class="keyline">It is a structural extension that fits into the existing creation flow.</div>
+          <p>The implementation does not require re-architecting Photoroom. It requires attaching identity at the moment of creation.</p>
+        </article>
+
+        <article class="card">
+          <div class="tag">What actually happens</div>
+          <h3>Identity begins at creation.</h3>
+          <div class="keyline">The value comes from how simple components are connected.</div>
+          <ul class="clean">
+            <li>a product identity is generated</li>
+            <li>a verifiable structure is established</li>
+            <li>the content is linked to that structure</li>
+          </ul>
+          <p>This happens within the existing flow, not outside of it.</p>
+        </article>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <div class="tag">Operational flow</div>
+        <h3>From creation to independent verification</h3>
+        <div class="keyline">The PoC is designed to mirror production conditions.</div>
+        <div class="flow">
+          <div class="node">1. Image is created<br />in Photoroom</div>
+          <div class="arrow">→</div>
+          <div class="node">2. Identity is generated<br />at creation</div>
+          <div class="arrow">→</div>
+          <div class="node">3. Content is linked<br />to a verifiable structure</div>
+        </div>
+        <div class="flow" style="margin-top:12px;">
+          <div class="node">4. Content is distributed<br />externally</div>
+          <div class="arrow">→</div>
+          <div class="node">5. Identity is verified<br />independently</div>
+          <div class="arrow">→</div>
+          <div class="node">Production-like behavior<br />under controlled conditions</div>
+        </div>
+      </div>
+
+      <div class="mini-grid">
+        <article class="card">
+          <div class="tag">Integration nature</div>
+          <h3>This is an additive layer.</h3>
+          <div class="keyline">It can coexist with the current system.</div>
+          <ul class="clean">
+            <li>no disruption to existing workflows</li>
+            <li>no dependency on external platforms</li>
+            <li>no requirement for immediate user awareness</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="tag">PoC as structural validation</div>
+          <h3>The PoC is not designed as an isolated test.</h3>
+          <div class="keyline">It is a controlled introduction of the identity layer into real content creation.</div>
+          <ul class="clean">
+            <li>identity can be attached at creation</li>
+            <li>it persists across distribution</li>
+            <li>it can be verified independently</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="cards-2" style="margin-top:18px;">
+        <article class="card">
+          <div class="tag">From PoC to production</div>
+          <h3>The PoC does not end as a prototype.</h3>
+          <div class="keyline">What is validated does not need to be rebuilt. It is extended.</div>
+          <p>Identity structure, integration points, and operational behavior become the foundation of production deployment.</p>
+        </article>
+
+        <article class="card">
+          <div class="tag">Deployment model</div>
+          <h3>Deployment can be gradual.</h3>
+          <div class="keyline">Controlled introduction without system disruption.</div>
+          <ul class="clean">
+            <li>start with limited categories</li>
+            <li>expand to selected merchants</li>
+            <li>extend across broader use cases</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <div class="tag">Identity Continuity</div>
+        <h3>Identity persists beyond any single platform.</h3>
+        <div class="keyline">It is externally verifiable and continues to exist across environments.</div>
+        <p>The identity does not remain inside Photoroom. It travels with the product across the internet.</p>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <div class="tag">Closing</div>
+        <h3>This is not about building complexity.</h3>
+        <div class="keyline">It is about introducing structure at the only point where it can exist: creation.</div>
+        <div class="cta-band">
+          <a class="btn" href="#ux">Explore UX scenarios</a>
+          <a class="btn-secondary" href="#contact">Define a PoC together</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="ux">
+    <div class="wrap">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">UX Scenarios</div>
+          <h2>How This Layer May Be Experienced</h2>
+          <div class="section-intro">Illustrative UX directions to show how identity at creation may appear in merchant, buyer, and cross-platform flows. These are directional examples, not fixed product specifications.</div>
+        </div>
+      </div>
+
+      <div class="cards-4">
+        <article class="card ux-scene">
+          <div class="ux-number">01</div>
+          <h3>Verified at Creation</h3>
+          <div class="keyline">Identity begins at the same moment the visual asset is created.</div>
+          <p>A merchant generates a product image in Photoroom and receives a subtle indication that product identity has been attached at creation.</p>
+          <div class="scene-strip">
+            <div class="scene-flow">
+              <div class="scene-step">Merchant prepares product</div>
+              <div class="scene-arrow">→</div>
+              <div class="scene-step">Image created in Photoroom</div>
+              <div class="scene-arrow">→</div>
+              <div class="scene-step">Identity attached at creation</div>
+            </div>
+          </div>
+          <div class="ux-line">Signal: creation and identity no longer start separately.</div>
+        </article>
+
+        <article class="card ux-scene">
+          <div class="ux-number">02</div>
+          <h3>View Authenticity</h3>
+          <div class="keyline">Verification becomes a user action, not a hidden back-office process.</div>
+          <p>A viewer encounters product content on another platform and chooses to open an authenticity page to confirm origin and continuity.</p>
+          <div class="scene-strip">
+            <div class="scene-flow">
+              <div class="scene-step">Buyer sees content</div>
+              <div class="scene-arrow">→</div>
+              <div class="scene-step">Authenticity page opened</div>
+              <div class="scene-arrow">→</div>
+              <div class="scene-step">Origin and continuity confirmed</div>
+            </div>
+          </div>
+          <div class="ux-line">Signal: identity remains independently visible after distribution.</div>
+        </article>
+
+        <article class="card ux-scene">
+          <div class="ux-number">03</div>
+          <h3>Merchant Confidence Layer</h3>
+          <div class="keyline">Product visuals gain a parallel layer of origin-linked clarity.</div>
+          <p>Sellers manage content with a clearer sense that origin-linked identity exists alongside the visual asset, without disrupting the normal creation flow.</p>
+          <div class="scene-strip">
+            <div class="scene-flow">
+              <div class="scene-step">Seller manages product content</div>
+              <div class="scene-arrow">→</div>
+              <div class="scene-step">Identity layer visible alongside visuals</div>
+              <div class="scene-arrow">→</div>
+              <div class="scene-step">Clearer merchant confidence</div>
+            </div>
+          </div>
+          <div class="ux-line">Signal: trust is supported by structure, not by manual explanation.</div>
+        </article>
+
+        <article class="card ux-scene">
+          <div class="ux-number">04</div>
+          <h3>Cross-Platform Verification</h3>
+          <div class="keyline">Identity persists even after content leaves its point of creation.</div>
+          <p>Once product content moves into ads, listings, or social environments, verification remains possible through a connected identity layer.</p>
+          <div class="scene-strip">
+            <div class="scene-flow">
+              <div class="scene-step">Ad / Listing / Social distribution</div>
+              <div class="scene-arrow">→</div>
+              <div class="scene-step">Identity remains linked</div>
+              <div class="scene-arrow">→</div>
+              <div class="scene-step">Verification still possible</div>
+            </div>
+          </div>
+          <div class="ux-line">Signal: origin can still be checked outside the original platform.</div>
+        </article>
+      </div>
+
+      <div class="cards-2" style="margin-top:18px;">
+        <article class="card">
+          <div class="tag">Why UX matters</div>
+          <h3>This is how the strategic layer becomes visible.</h3>
+          <div class="keyline">If the identity layer cannot be experienced, it cannot shape market behavior.</div>
+          <p>These examples are designed to show how an invisible structural layer can surface at the right moments for merchants, buyers, and platforms.</p>
+        </article>
+
+        <article class="card">
+          <div class="tag">Controlled exploration</div>
+          <h3>Additional UX explorations are available upon request.</h3>
+          <div class="keyline">More detailed flows can be shared through direct discussion.</div>
+          <p>Expanded UX directions, sequence concepts, and PoC-facing interaction patterns can be provided in a controlled setting.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="standards">
+    <div class="wrap">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Market &amp; Standards</div>
+          <h2>Why This Layer Matters Beyond Features</h2>
+          <div class="section-intro">For legal, policy, and strategy stakeholders: standards compatibility, market implications, and the role of verifiable origin.</div>
+        </div>
+      </div>
+
+      <div class="cards-2">
+        <article class="card">
+          <div class="tag">Different layer from C2PA</div>
+          <h3>C2PA records how content was created.</h3>
+          <div class="keyline">Showplly defines what the product is.</div>
+          <p>This is not a replacement argument. It is a layer argument. Content provenance matters, but product identity must begin before content spreads.</p>
+        </article>
+
+        <article class="card">
+          <div class="tag">Why this matters</div>
+          <h3>Metadata alone does not establish product reality.</h3>
+          <div class="keyline">C2PA helps record declarations. Showplly helps establish product identity.</div>
+          <p>A product image can carry metadata and still lack any structural proof that the product itself is real, attributable, and continuously linked to its source.</p>
+        </article>
+      </div>
+
+      <div class="cards-2" style="margin-top:18px;">
+        <article class="card">
+          <div class="tag">Standards compatibility</div>
+          <h3>Independent core. Compatible by design.</h3>
+          <div class="keyline">Future-proof flexibility without system dependency.</div>
+          <p>Showplly operates independently at the identity layer. Standards such as C2PA can be integrated when needed, without becoming the foundation of the system.</p>
+        </article>
+
+        <article class="card">
+          <div class="tag">Regulation</div>
+          <h3>Disclosure is not the same as verifiable origin.</h3>
+          <div class="keyline">Rules may require labels. Markets will require structure.</div>
+          <p>As standards evolve, platforms will increasingly be judged by whether the origin and continuity of products can be verified.</p>
+        </article>
+      </div>
+
+      <div class="cta-band">
+        <a class="btn-secondary" href="#strategic">Return to the strategic layer</a>
+        <a class="btn-secondary" href="#implementation">See the implementation layer</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="growth">
+    <div class="wrap">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Growth Engine</div>
+          <h2>How This Creates Asymmetric Advantage</h2>
+          <div class="section-intro">For business and go-to-market stakeholders: why distribution matters, how rollout compounds, and how a layer becomes a revenue opportunity.</div>
+        </div>
+      </div>
+
+      <div class="cards-2">
+        <article class="card">
+          <div class="tag">Strategic leverage point</div>
+          <h3>Photoroom already has distribution.</h3>
+          <div class="keyline">An authenticity layer becomes powerful when it is introduced where product content already begins to scale.</div>
+          <p>That position matters more than the feature itself.</p>
+        </article>
+
+        <article class="card">
+          <div class="tag">Existing customer expansion</div>
+          <h3>The market effect can expand rapidly.</h3>
+          <div class="keyline">Identity-enabled content can move through the same customers who already create product content.</div>
+          <p>Creation does not need to move. The layer is introduced where creation already happens.</p>
+        </article>
+      </div>
+
+      <div class="cards-3" style="margin-top:18px;">
+        <article class="card">
+          <div class="tag">Frictionless rollout</div>
+          <h3>No disruptive rollout model is required.</h3>
+          <div class="keyline">Identity can be introduced without forcing immediate behavior change.</div>
+          <p>That makes early market validation possible in real operating conditions.</p>
+        </article>
+
+        <article class="card">
+          <div class="tag">Compounding effect</div>
+          <h3>Identity-enabled content changes behavior.</h3>
+          <ul class="clean">
+            <li>sellers gain differentiation</li>
+            <li>buyers gain confidence</li>
+            <li>authenticity becomes visible</li>
+            <li>demand for verification increases</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="tag">Why this is asymmetric</div>
+          <h3>Competitors may discuss authenticity.</h3>
+          <div class="keyline">Photoroom is in a position to operationalize it at creation.</div>
+          <p>One side adds features. The other side shapes market behavior.</p>
+        </article>
+      </div>
+
+      <div class="cards-2" style="margin-top:18px;">
+        <article class="card">
+          <div class="tag">Revenue perspective</div>
+          <h3>This is not only a defensive move.</h3>
+          <div class="keyline">This can become a revenue layer.</div>
+          <ul class="clean">
+            <li>premium differentiation</li>
+            <li>stronger enterprise positioning</li>
+            <li>new productized offerings</li>
+            <li>strategic advantage in high-value categories</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="tag">From PoC to market impact</div>
+          <h3>Early validation can create demand signals.</h3>
+          <div class="keyline">The layer begins in a controlled environment but can influence real market behavior.</div>
+          <p>Once identity-enabled content is introduced through Photoroom, existing merchants begin using it, identity enters real distribution channels, and buyers encounter verifiable origin.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap footer">
+      <div class="footer-card">
+        <div class="section-kicker">Founder</div>
+        <h2>Built from first-hand experience</h2>
+        <p class="section-intro">Showplly is led by a founder with deep experience in global hardware, logistics, and cross-border commerce. Over 30 years in computer hardware and international distribution have shown how counterfeit products, opaque logistics, and fragmented trade data undermine trust and profitability.</p>
+        <p><strong>Yuzuru Sano — Founder, Showplly</strong></p>
+        <div style="height:18px;"></div>
+        <h3>Define Product Identity Together</h3>
+        <p class="muted">Continue generating images. Or define the identity layer that products will carry across the internet.</p>
+        <div class="cta-band">
+          <a class="btn" href="mailto:partnership@showplly.com">Request a private discussion</a>
+          <a class="btn-secondary" href="#strategic">Return to top-level story</a>
+        </div>
+        <p class="muted" style="margin-top:16px; font-size:14px;">Contact: partnership@showplly.com</p>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
